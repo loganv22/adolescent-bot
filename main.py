@@ -2,19 +2,19 @@
 import os
 import random
 import util as u
-from keep_alive import keep_alive
+from keep_alive import keep_alive # as one might guess, this keeps the bot running
 
 import discord
 from dotenv import load_dotenv
 
-# fancy tech stuff - gets the secrets
+# fancy tech stuff - gets the secrets from the repl where it runs
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 # useful variables
 prefix = u.textRead("settings.txt")[3]
 client = discord.Client()
-rps = False
+rps = False # enables rock paper scissors game
 
 # displays when bot connects
 @client.event
@@ -25,8 +25,11 @@ async def on_ready():
 async def on_message(message):
   global rps
   
+  # makes sure the bot doesn't activate itself
   if message.author == client.user:
     return
+  
+  # rock paper scissors
   if message.content.startswith(prefix + "rps"):
     await message.channel.send("Ok let's play. You go first.")
     rps = True
@@ -49,17 +52,20 @@ async def on_message(message):
     rps = False
     return
 
+  # pulls from a list of yo mama jokes
   if message.content.startswith(prefix + "insult"):
     insultRequest = message.content.split(" ")
-    if len(insultRequest) > 1 and insultRequest[1].startswith("<@"):
-      await message.channel.send(u.randomYourMomJoke(insultRequest[1]))
+    if len(insultRequest) > 2 and insultRequest[2].startswith("<@"):
+      await message.channel.send(u.randomYourMomJoke(insultRequest[2]))
       if random.randrange(100) > 100 - int(u.textRead("settings.txt")[2]):
-        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif'))
+        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif')) # chance to send a gif
     else:
       await message.channel.send(u.randomYourMomJoke())
       if random.randrange(100) > 100 - int(u.textRead("settings.txt")[2]):
-        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif'))
+        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif')) # chance to send a gif
     return
+  
+  # randomly generated yo mama joke
   elif message.content.startswith(prefix + "geninsult"):
     insultRequest = message.content.split(" ")
     if len(insultRequest) > 1 and insultRequest[1].startswith("<@"):
@@ -71,6 +77,8 @@ async def on_message(message):
       if random.randrange(100) > 100 - int(u.textRead("settings.txt")[2]):
         await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif'))
     return
+  
+  # explains the bot
   elif message.content.startswith(prefix + "help"):
     await message.channel.send(f"""
 Hello! I'm a very accurate representation of an annoying adolescent, created by a group of annoying adolescents. I tell the best your mom jokes you've ever encountered. Try some of these commands!
@@ -95,17 +103,19 @@ Coming soon: commands for changing the frequency of random responses to messages
 Curse another Discord server with my presence!
 https://discord.com/api/oauth2/authorize?client_id=944652303632322591&permissions=277025459264&redirect_uri=https%3A%2F%2Fdiscord.com%2Fchannels%2F%40me&response_type=code&scope=bot%20messages.read
 
-*I'm dedicated to ZA!* You know what you said about my mother.
+*I'm dedicated to ZA! You know what you said about my mother.*
 
 *This is a submission for Hack Kean 2022*
 """)
     return
     
+  # responds to any animal mentions with a rude comparison to your mother
   animal = u.containsAny(message.content, u.textRead("insults/animals.txt"))
   if random.randrange(100) > 100 - int(u.textRead("settings.txt")[0]) and animal:
     await message.channel.send(f'{animal.title()}? Like your mom?')
     return
         
+  # random snarky comments 
   if random.randrange(100) > 100 - int(u.textRead("settings.txt")[1]): 
     if (
       message.content.lower().startswith("who ") or
