@@ -1,0 +1,33 @@
+whale
+cow
+elephant
+capybara
+groundhog
+hog
+pig
+hippo
+beaver
+walrus
+buffalo
+bison
+toad
+reptile
+rodent
+rat
+ape
+orangutan
+gorilla
+bonobo
+spider monkey
+baboon
+dusky leaf monkey
+columbian red howler
+howler monkey
+de brazza's
+bald uakari
+popa langur
+emperor tamarian
+chimpanzee
+chimp
+gibbon
+monkey
