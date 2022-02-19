@@ -2,7 +2,6 @@
 import os
 import random
 import util as u
-from keep_alive import keep_alive
 
 import discord
 from dotenv import load_dotenv
