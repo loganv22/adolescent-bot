@@ -54,22 +54,22 @@ async def on_message(message):
     if len(insultRequest) > 1 and insultRequest[1].startswith("<@"):
       await message.channel.send(u.randomYourMomJoke(insultRequest[1]))
       if random.randrange(100) > 100 - int(u.textRead("settings.txt")[2]):
-        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 4))+ '.gif'))
+        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif'))
     else:
       await message.channel.send(u.randomYourMomJoke())
       if random.randrange(100) > 100 - int(u.textRead("settings.txt")[2]):
-        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 4))+ '.gif'))
+        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif'))
     return
   elif message.content.startswith(prefix + "geninsult"):
     insultRequest = message.content.split(" ")
     if len(insultRequest) > 1 and insultRequest[1].startswith("<@"):
       await message.channel.send(u.generateYourMomJoke(insultRequest[1]))
       if random.randrange(100) > 100 - int(u.textRead("settings.txt")[2]):
-        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 4))+ '.gif'))
+        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif'))
     else:
       await message.channel.send(u.generateYourMomJoke())
       if random.randrange(100) > 100 - int(u.textRead("settings.txt")[2]):
-        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 4))+ '.gif'))
+        await message.channel.send(file=discord.File('insults/roastedgifs/roasted'+str(random.randint(1, 5))+ '.gif'))
     return
   elif message.content.startswith(prefix + "help"):
     await message.channel.send(f"""
